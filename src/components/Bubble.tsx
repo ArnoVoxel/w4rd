@@ -1,4 +1,5 @@
 import { View, Text } from "react-native";
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 function Bubble(props: { size: number; color: string; name: string; }) {
   const { size, color, name } = props;
@@ -12,6 +13,7 @@ function Bubble(props: { size: number; color: string; name: string; }) {
       justifyContent: 'center',
       alignItems: 'center',
     }}>
+      <Ionicons name="umbrella-sharp" size={32} color="white" />
       <Text style={{ color: 'white' }}>{name}</Text>
     </View>
   );
