@@ -1,20 +1,27 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Image, View } from 'react-native';
+import { Button, Image, Text, View } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
+import { Camera, CameraType } from 'expo-camera';
 
 export default function ImagePickerExample() {
   const [image, setImage] = useState<string | null>(null);
+  const [permission, requestPermission] = Camera.useCameraPermissions();
 
-  useEffect(() => {
-    requestCameraPermission();
-  }, []);
+  console.log(permission);
 
-  async function requestCameraPermission() {
-    const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL, Permissions.CAMERA);
-    if (status !== 'granted') {
-      alert('Sorry, we need camera roll permissions to make this work!');
-    }
+  if (!permission) {
+    // Camera permissions are still loading
+    return <View />;
+  }
+
+  if (!permission.granted) {
+    // Camera permissions are not granted yet
+    return (
+      <View >
+        <Text >We need your permission to show the camera</Text>
+        <Button onPress={requestPermission} title="grant permission" />
+      </View>
+    );
   }
 
   const pickImage = async () => {
