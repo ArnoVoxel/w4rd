@@ -11,8 +11,18 @@ export default function App() {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Homepage" component={Homepage} />
+      <Stack.Navigator screenOptions={{
+        headerStyle: {
+          backgroundColor: '#1f146e',
+        },
+        headerTintColor: '#fff',
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}>
+        <Stack.Screen name="Homepage" component={Homepage} options={{
+          title: 'Les bubulles'
+        }} />
         <Stack.Screen name="Gyroscope" component={GyroscopePage} />
       </Stack.Navigator>
     </NavigationContainer>
